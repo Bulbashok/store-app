@@ -15,6 +15,13 @@
   object-fit: contain;
 }
 
+.category {
+  font-size: 0.8rem;
+  color: #666;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
 .info {
   padding: 1rem;
   flex: 1;
@@ -39,6 +46,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.rating {
+  margin-left: 1rem;
+  color: #f39c12;
 }
 
 .price {

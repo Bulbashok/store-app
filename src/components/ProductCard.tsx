@@ -1,16 +1,22 @@
 import styles from "./ProductCard.module.css";
 
-interface ProductCardProps {
+interface Product {
   id: number;
   title: string;
   price: number;
   description: string;
   category: string;
   image: string;
+
   rating: {
     rate: number;
     count: number;
   };
+}
+
+interface ProductCardProps extends Product {
+  inStock?: boolean;
+  onAddToCart: () => void;
 }
 
 export default function ProductCard({
@@ -20,17 +26,33 @@ export default function ProductCard({
   category,
   image,
   rating,
+  inStock = true,
+  onAddToCart,
 }: ProductCardProps) {
   return (
     <div className={styles.card}>
       <img src={image} alt={title} className={styles.image} loading="lazy" />
-      <h3 className={styles.title}>{title}</h3>
-      <p className={styles.description}>{description}</p>
-      <p className={styles.category}>{category}</p>
-      <div className={styles.footer}>
-        <span className={styles.price}>${price}</span>
-        <span className={styles.rating}>⭐{rating.rate}</span>
-        <button className={styles.button}>Add to cart</button>
+      <div className={styles.info}>
+        <span className={styles.category}>{category}</span>
+        <h3 className={styles.title}>{title}</h3>
+        <p className={styles.description}>{description}</p>
+        <div className={styles.footer}>
+          <div>
+            <span className={styles.price}>${price.toFixed(2)}</span>
+            <span className={styles.rating}>⭐ {rating.rate}</span>
+          </div>
+          {inStock ? (
+            <button
+              className={styles.button}
+              onClick={onAddToCart}
+              aria-label={`Add ${title} to cart`}
+            >
+              Add to cart
+            </button>
+          ) : (
+            <span className={styles.outOfStock}>Out of stock</span>
+          )}
+        </div>
       </div>
     </div>
   );
