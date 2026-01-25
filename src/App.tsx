@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import CatalogPage from "./pages/CatalogPage";
-import CartPage from "./pages/CartPage";
-import Header from "./components/Header";
+import CatalogPage from "./pages/CatalogPage/CatalogPage";
+import CartPage from "./pages/CardPage/CartPage";
+import Header from "./components/Header/Header";
 
 function App() {
   return (
