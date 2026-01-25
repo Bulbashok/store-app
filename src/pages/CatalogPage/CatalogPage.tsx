@@ -4,8 +4,10 @@ import { fetchProducts } from "../../api/store";
 import styles from "./CatalogPage.module.css";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import { useCartStore } from "../../store/cartStore";
+import Toast from "../../components/Toast/Toast";
 
 export default function CatalogPage() {
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const { addItem } = useCartStore();
@@ -25,6 +27,15 @@ export default function CatalogPage() {
     loadProduct();
   }, []);
 
+  const handleAddToCart = (product: Product) => {
+    addItem(product);
+    setToastMessage(`${product.title} added to cart!`);
+  };
+
+  const clearToast = () => {
+    setToastMessage(null);
+  };
+
   if (loading) {
     return <div className={styles.loading}>Loading...</div>;
   }
@@ -39,11 +50,14 @@ export default function CatalogPage() {
               key={product.id}
               {...product}
               inStock={true}
-              onAddToCart={() => addItem(product)}
+              onAddToCart={() => handleAddToCart(product)}
             />
           ))}
         </div>
       </div>
+      {toastMessage && (
+        <Toast message={toastMessage} duration={2000} onClose={clearToast} />
+      )}
     </>
   );
 }
