@@ -6,6 +6,7 @@ import ProductCard from "../../components/ProductCard/ProductCard";
 import { useCartStore } from "../../store/cartStore";
 import Toast from "../../components/Toast/Toast";
 import { useDebounce } from "../../hooks/useDebounce";
+import CatalogPageSkeleton from "../../components/CatalogPageSkeleton/CatalogPageSkeleton";
 
 export default function CatalogPage() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -111,7 +112,7 @@ export default function CatalogPage() {
   };
 
   if (loading) {
-    return <div className={styles.loading}>Loading...</div>;
+    return <CatalogPageSkeleton />;
   }
 
   return (
@@ -155,7 +156,7 @@ export default function CatalogPage() {
               <ProductCard
                 key={product.id}
                 {...product}
-                inStock={true}
+                inStock={product.id % 5 !== 0}
                 onAddToCart={() => handleAddToCart(product)}
               />
             ))
