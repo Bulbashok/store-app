@@ -1,73 +1,117 @@
-# React + TypeScript + Vite
+# FakeStore App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Современное приложение для просмотра каталога товаров и управления корзиной покупок с использованием React, TypeScript.
 
-Currently, two official plugins are available:
+## Демо
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[Live Demo](***)
 
-## React Compiler
+### Требования
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Node.js 18+
+- npm или yarn
 
-## Expanding the ESLint configuration
+### Установка и запуск
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. **Клонирование репозитория**
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone https://github.com/Bulbashok/store-app.git
+cd store-app
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. **Установка зависимостей**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+3. **Запуск dev сервера**
+
+```bash
+npm run dev
+```
+
+4. **Открытие приложения**
+   Откройте [http://localhost:5173](http://localhost:5173) в браузере
+
+### Сборка для продакшена
+
+```bash
+npm run build
+```
+
+### Предпросмотр сборки
+
+```bash
+npm run preview
+```
+
+## Переменные окружения
+
+Создайте файл `.env` в корне проекта:
+
+```env
+# API URL (опционально, по умолчанию используется FakeStore API)
+VITE_API_URL=https://fakestoreapi.com
+
+# Другие переменные окружения при необходимости
+```
+
+### Основной стек
+
+- **React 19** - современная библиотека для создания UI
+- **TypeScript** - строгая типизация для надежности кода
+- **Vite** - быстрый сборщик и dev сервер
+- **React Router** - навигация между страницами
+
+### Стили и UI
+
+- **CSS Modules** - изолированные стили компонентов
+- **CSS Variables** - кастомные свойства для темной темы
+- **Responsive Design** - адаптивная сетка и flexbox
+
+### State Management
+
+- **Zustand** - легковесное управление состоянием
+- **localStorage** - персистентность корзины
+
+### Каталог товаров
+
+- **Отображение товаров** в виде адаптивных карточек
+- **Поиск по названию** с debounce для оптимизации
+- **Фильтрация по категориям** товаров
+- **Сортировка** по цене и названию
+- **Пагинация** (12 товаров на странице)
+- **Индикатор наличия** товаров на складе
+- **Skeleton loaders** для улучшения UX при загрузке
+
+### Корзина
+
+- **Добавление товаров** в корзину с toast-уведомлениями
+- **Изменение количества** товаров (+/-)
+- **Удаление товаров** из корзины
+- **Подсчет общей стоимости** покупки
+- **Сохранение корзины** в localStorage
+- **Badge с количеством** товаров в шапке
+
+### Дизайн и UX
+
+- **Темная тема** с современным дизайном
+- **Адаптивная верстка** (desktop, tablet, mobile)
+- **Плавные анимации** и переходы
+- **Hover эффекты** на интерактивных элементах
+- **Пустые состояния** для корзины и каталога
+- **Disabled состояния** для кнопок
+
+### API
+
+- **FakeStore API** - моковые данные для товаров
+- **Fallback логика** - работа офлайн с моковыми данными
+
+## Адаптивность
+
+- **Mobile**: < 768px
+- **Tablet**: 768px - 1024px
+- **Desktop**: > 1024px
+- **Large Desktop**: > 1536px
