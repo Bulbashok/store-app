@@ -47,7 +47,6 @@ export default function CartPage() {
               onClick={() => removeItem(item.id)}
               aria-label="Remove item"
             >
-              ×
             </button>
             <div className={styles.total}>
               ${(item.price * item.quantity).toFixed(2)}

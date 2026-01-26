@@ -117,7 +117,7 @@ export default function CatalogPage() {
   return (
     <>
       <div className={styles.container}>
-        <h1>Catalog</h1>
+        <h1 className={styles.title}>Catalog</h1>
         <div className={styles.controls}>
           <select
             value={selectedCategory}
@@ -131,7 +131,7 @@ export default function CatalogPage() {
               </option>
             ))}
           </select>
-                    <input
+          <input
             type="text"
             placeholder="Search products..."
             value={searchQuery}
