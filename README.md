@@ -4,7 +4,7 @@
 
 ## Демо
 
-[Live Demo](***)
+[Live Demo](https://store-app-rust-seven.vercel.app/)
 
 ### Требования
 
