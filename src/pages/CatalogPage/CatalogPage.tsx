@@ -7,6 +7,7 @@ import { useCartStore } from "../../store/cartStore";
 import Toast from "../../components/Toast/Toast";
 import { useDebounce } from "../../hooks/useDebounce";
 import CatalogPageSkeleton from "../../components/CatalogPageSkeleton/CatalogPageSkeleton";
+import { truncateWords } from "../../utils/textUtils";
 
 export default function CatalogPage() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -87,7 +88,8 @@ export default function CatalogPage() {
 
   const handleAddToCart = (product: Product) => {
     addItem(product);
-    setToastMessage(`${product.title} added to cart!`);
+    const truncatedTitle = truncateWords(product.title, 5);
+    setToastMessage(`${truncatedTitle} added to cart!`);
   };
 
   const clearToast = () => {

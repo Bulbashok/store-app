@@ -21,7 +21,10 @@ export default function ProductCard({
         <div className={styles.footer}>
           <div>
             <span className={styles.price}>${price.toFixed(2)}</span>
-            <span className={styles.rating}>⭐ {rating.rate}</span>
+            <div className={styles.ratingContainer}>
+              <span className={styles.rating}>⭐ {rating.rate}</span>
+              <span className={styles.count}>({rating.count})</span>
+            </div>
           </div>
           {inStock ? (
             <button

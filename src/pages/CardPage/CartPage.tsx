@@ -49,7 +49,7 @@ export default function CartPage() {
             >
             </button>
             <div className={styles.total}>
-              ${(item.price * item.quantity).toFixed(2)}
+              Total price: ${(item.price * item.quantity).toFixed(2)}
             </div>
           </div>
         ))}
