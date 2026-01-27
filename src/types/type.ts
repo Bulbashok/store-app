@@ -14,18 +14,3 @@ export interface Product {
 export interface CartItem extends Product {
   quantity: number;
 }
-
-export interface CartState {
-  items: CartItem[];
-  addItem: (product: Product) => void;
-  removeItem: (id: number) => void;
-  updateQuantity: (id: number, quantity: number) => void;
-  clearCart: () => void;
-  totalItems: () => number;
-  totalPrice: () => number;
-}
-
-export interface ProductCardProps extends Product {
-  inStock?: boolean;
-  onAddToCart: () => void;
-}

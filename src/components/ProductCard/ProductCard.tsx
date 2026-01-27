@@ -1,5 +1,10 @@
-import type { ProductCardProps } from "../../types/type";
+import type { Product } from "../../types/type";
 import styles from "./ProductCard.module.css";
+
+export interface ProductCardProps extends Product {
+  inStock?: boolean;
+  onAddToCart: () => void;
+}
 
 export default function ProductCard({
   title,
