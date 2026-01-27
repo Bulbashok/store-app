@@ -44,22 +44,6 @@
   --radius-lg: 12px;
 }
 
-:root.light {
-  --text-primary: #1f2937;
-  --text-secondary: #6b7280;
-  --text-muted: #9ca3af;
-  --background-primary: #ffffff;
-  --background-secondary: #f9fafb;
-  --background-tertiary: #f3f4f6;
-  --border-color: rgba(0, 0, 0, 0.1);
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
 a {
   font-weight: 500;
   color: var(--primary-color);
@@ -134,7 +118,7 @@ button:active {
 }
 
 @media (prefers-color-scheme: light) {
-  :root.light {
+  :root {
     --text-primary: #1f2937;
     --text-secondary: #6b7280;
     --text-muted: #9ca3af;
@@ -144,7 +128,7 @@ button:active {
     --border-color: rgba(0, 0, 0, 0.1);
   }
 
-  body.light {
+  body {
     background-color: var(--background-primary);
     color: var(--text-primary);
   }

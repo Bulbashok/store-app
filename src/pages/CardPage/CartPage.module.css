@@ -144,6 +144,7 @@
     grid-template-columns: 1fr;
     text-align: center;
     gap: 1rem;
+    justify-items: center;
   }
 
   .image {
@@ -154,24 +155,6 @@
     max-width: 100%;
   }
 
-  .quantity {
-    justify-content: center;
-  }
-}
-
-@media (max-width: 768px) {
-  .item {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-
-  .image {
-    justify-self: center;
-  }
-
-  .summary {
-    max-width: 100%;
-  }
   .quantity {
     justify-content: center;
   }
