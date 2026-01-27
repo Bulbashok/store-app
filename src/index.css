@@ -44,6 +44,12 @@
   --radius-lg: 12px;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 a {
   font-weight: 500;
   color: var(--primary-color);

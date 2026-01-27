@@ -6,7 +6,7 @@ import ProductCard from "../../components/ProductCard/ProductCard";
 import { useCartStore } from "../../store/cartStore";
 import Toast from "../../components/Toast/Toast";
 import { useDebounce } from "../../hooks/useDebounce";
-import CatalogPageSkeleton from "../../components/CatalogPageSkeleton/CatalogPageSkeleton";
+import ProductCardSkeleton from "../../components/ProductCardSkeleton/ProductCardSkeleton";
 import { truncateWords } from "../../utils/textUtils";
 
 export default function CatalogPage() {
@@ -113,10 +113,6 @@ export default function CatalogPage() {
     }
   };
 
-  if (loading) {
-    return <CatalogPageSkeleton />;
-  }
-
   return (
     <>
       <div className={styles.container}>
@@ -126,6 +122,7 @@ export default function CatalogPage() {
             value={selectedCategory}
             onChange={handleCategoryChange}
             className={styles.select}
+            disabled={loading}
           >
             <option value="all">All Categories</option>
             {categories.map((cat) => (
@@ -140,11 +137,13 @@ export default function CatalogPage() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className={styles.search}
+            disabled={loading}
           />
           <select
             value={sortOption}
             onChange={handleSortChange}
             className={styles.select}
+            disabled={loading}
           >
             <option value="price-asc">Price: Low to High</option>
             <option value="price-desc">Price: High to Low</option>
@@ -153,7 +152,11 @@ export default function CatalogPage() {
           </select>
         </div>
         <div className={styles.grid}>
-          {paginatedProducts.length > 0 ? (
+          {loading ? (
+            Array.from({ length: 12 }, (_, index) => (
+              <ProductCardSkeleton key={index} />
+            ))
+          ) : paginatedProducts.length > 0 ? (
             paginatedProducts.map((product) => (
               <ProductCard
                 key={product.id}
@@ -166,7 +169,7 @@ export default function CatalogPage() {
             <p className={styles.empty}>No products found.</p>
           )}
         </div>
-        {totalPages > 1 && (
+        {!loading && totalPages > 1 && (
           <div className={styles.pagination}>
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
               <button
