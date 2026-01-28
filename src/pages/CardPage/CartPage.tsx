@@ -1,4 +1,5 @@
 import { useCartStore } from "../../store/cartStore";
+import type { CartItem } from "../../types/type";
 import styles from "./CartPage.module.css";
 
 export default function CartPage() {
@@ -19,7 +20,7 @@ export default function CartPage() {
       <h1 className={styles.title}>Shopping Cart</h1>
 
       <div className={styles.items}>
-        {items.map((item) => (
+        {items.map((item: CartItem) => (
           <div key={item.id} className={styles.item}>
             <img src={item.image} alt={item.title} className={styles.image} />
             <div className={styles.info}>
@@ -46,8 +47,7 @@ export default function CartPage() {
               className={styles.remove}
               onClick={() => removeItem(item.id)}
               aria-label="Remove item"
-            >
-            </button>
+            ></button>
             <div className={styles.total}>
               Total price: ${(item.price * item.quantity).toFixed(2)}
             </div>

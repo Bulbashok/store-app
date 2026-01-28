@@ -1,20 +1,30 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { CartState } from "../types/type";
+import type { Product, CartItem } from "../types/type";
+
+export interface CartState {
+  items: CartItem[];
+  addItem: (product: Product) => void;
+  removeItem: (id: number) => void;
+  updateQuantity: (id: number, quantity: number) => void;
+  clearCart: () => void;
+  totalItems: () => number;
+  totalPrice: () => number;
+}
 
 export const useCartStore = create<CartState>()(
   persist(
     (set, get) => ({
       items: [],
 
-      addItem: (product) => {
-        set((state) => {
+      addItem: (product: Product) => {
+        set((state: CartState) => {
           const existingItem = state.items.find(
-            (item) => item.id === product.id,
+            (item: CartItem) => item.id === product.id,
           );
           if (existingItem) {
             return {
-              items: state.items.map((item) =>
+              items: state.items.map((item: CartItem) =>
                 item.id === product.id
                   ? { ...item, quantity: item.quantity + 1 }
                   : item,
@@ -28,16 +38,16 @@ export const useCartStore = create<CartState>()(
         });
       },
 
-      removeItem: (id) => {
-        set((state) => ({
-          items: state.items.filter((item) => item.id !== id),
+      removeItem: (id: number) => {
+        set((state: CartState) => ({
+          items: state.items.filter((item: CartItem) => item.id !== id),
         }));
       },
 
-      updateQuantity: (id, quantity) => {
+      updateQuantity: (id: number, quantity: number) => {
         if (quantity < 1) return;
-        set((state) => ({
-          items: state.items.map((item) =>
+        set((state: CartState) => ({
+          items: state.items.map((item: CartItem) =>
             item.id === id ? { ...item, quantity } : item,
           ),
         }));
@@ -46,10 +56,16 @@ export const useCartStore = create<CartState>()(
       clearCart: () => set({ items: [] }),
 
       totalItems: () =>
-        get().items.reduce((sum, item) => sum + item.quantity, 0),
+        get().items.reduce(
+          (sum: number, item: CartItem) => sum + item.quantity,
+          0,
+        ),
 
       totalPrice: () =>
-        get().items.reduce((sum, item) => sum + item.price * item.quantity, 0),
+        get().items.reduce(
+          (sum: number, item: CartItem) => sum + item.price * item.quantity,
+          0,
+        ),
     }),
     {
       name: "fakestore-cart",
